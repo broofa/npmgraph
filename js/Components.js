@@ -3,8 +3,8 @@ import React from 'react';
 import '/css/Components.scss';
 
 export function Loader({ activity, ...props }) {
-  return <div className='loader theme-dark'>
-    <div className='bg' />
+  return <div className='loader'>
+    <div />
     {activity.title} ...
   </div>;
 }
@@ -14,8 +14,10 @@ export function Toggle({ checked = false, value = true, onChange, style, childre
       <div onClick={() => onChange(checked ? false : value)} style={{
         display: 'inline-block',
         width: '4em',
-        backgroundColor: '#ccc',
+        backgroundColor: 'var(--bg-dim)',
+        border: 'solid 1px #777',
         borderRadius: '.5em',
+        marginTop: '.3em',
         marginRight: '.5em'
       }}>
         <div style={{
@@ -24,8 +26,8 @@ export function Toggle({ checked = false, value = true, onChange, style, childre
           textAlign: 'center',
           transition: '.15s',
           marginLeft: checked ? '0' : '1em',
-          backgroundColor: checked ? '#090' : '#aaa',
-          color: '#fff'
+          backgroundColor: checked ? '#0a0' : 'var(--bg)',
+          color: 'var(--fg)'
         }}>{checked ? 'On' : 'Off'}</div>
       </div>
       {children}

@@ -9,20 +9,20 @@ function ScoreBar({ title, score, style }) {
   const inner = <div style={{
     width: perc,
     textAlign: 'right',
-    backgroundColor: `hsl(${(score * 120)}, 75%, 70%)`,
+    backgroundColor: `hsl(${(score * 120)}, 75%, 50%)`,
     ...style
   }}>{perc}</div>;
 
   return <>
     <span style={{ marginRight: '1em', ...style }}>{title}</span>
-    <div style={{ border: 'solid 1px #ccc', width: '200px' }} >{inner}</div>
+    <div style={{ border: 'solid 1px var(--fg)', width: '200px' }} >{inner}</div>
   </>;
 }
 
 function TreeMap({ data, style, ...props }) {
   const [leaves, setLeaves] = useState([]);
 
-  // Render contents as an "effect" because d3 requires the pixel dimensions of the div
+  // Effect: Render requires pixel dimensions of the div
   useEffect(() => {
     const { clientWidth: w, clientHeight: h } = $('#treemap')[0], m = 1;
 
@@ -73,7 +73,7 @@ function TreeMap({ data, style, ...props }) {
           width: `${d.x1 - d.x0 - m}px`,
           height: `${d.y1 - d.y0 - m}px`,
           fontSize: `${65 + 70 * Math.sqrt(frac)}%`,
-          backgroundColor: `hsl(${(75 + (i / a.length) * 360) % 360}, 50%, 70%)`
+          backgroundColor: `hsl(${(75 + (i / a.length) * 360) % 360}, 50%, 50%)`
         }}>{d.data.name} <span>{size}</span></div>;
       })
     );

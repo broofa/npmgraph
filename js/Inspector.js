@@ -46,7 +46,7 @@ export function Section({ title, children, open = true, style, ...props }) {
 }
 
 export function Pane({ children, ...props }) {
-  return <div className='pane theme-lite' {...props}>{children}</div>;
+  return <div className='pane' {...props}>{children}</div>;
 }
 
 export function Tags({ children, style, ...props }) {
@@ -72,7 +72,7 @@ function Tab({ active, children, ...props }) {
   return <div className={`tab bright-hover ${active ? 'active' : ''}`} {...props}>{children}</div>;
 }
 
-export default function Inspector({ className, ...props }) {
+export default function Inspector(props) {
   const [query, setQuery] = useQuery();
   const [pane, setPane] = usePane();
   const [module] = useModule();
@@ -104,8 +104,8 @@ export default function Inspector({ className, ...props }) {
     setQuery(query);
   }
 
-  return <div id='inspector' className={`theme-lite ${className}`} {...props} >
-      <div id='tabs' className='theme-dark'>
+  return <div id='inspector' {...props} >
+      <div id='tabs'>
         <Tab active={pane == 'module'} onClick={() => setPane('module')}>Module</Tab>
         <Tab active={pane == 'graph'} onClick={() => setPane('graph')}>Graph</Tab>
         <Tab active={pane == 'info'} onClick={() => setPane('info')}>{'\u{24d8}'}</Tab>

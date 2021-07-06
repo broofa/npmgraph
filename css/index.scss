@@ -1,4 +1,29 @@
-:root {
+:root {  // Light theme (https://coolors.co/020303-f1f4f4-c8d3a7-e65c00)
+  --fg: #111;
+  --bg: #fff;
+  --fg-dim: #444;
+  --bg-dim: #bbb;
+  --bg-gradient-color: rgba(255, 255, 255, 0.25);
+  --bg0: #f1f4f4;
+  --bg1: #d6d6d6;
+  --highlight: #e65c00;
+}
+
+// Override for dark mode (screen only, print always uses light)
+@media only screen and (prefers-color-scheme: dark) {
+  :root { // Dark theme (https://coolors.co/f1f4f4-606c38-283618-ff761a)
+    --fg: #eee;
+    --bg: #111;
+    --fg-dim: #bbb;
+    --bg-dim: #444;
+    --bg-gradient-color: rgba(0, 0, 0, 0.25);
+    --bg0: #7e7e7d;
+    --bg1: #383838;
+    --highlight: #ff761a;
+  }
+}
+
+:root { /* stylelint-disable-line no-duplicate-selectors */
   --rad_sm: 5px;
   --rad_lg: 10px;
   --splitter-size: 2em;
@@ -7,56 +32,63 @@
   --bg-gradient:
     linear-gradient(
       to bottom,
-      rgba(255, 255, 255, 0.2),
+      var(--bg-gradient-color),
       transparent 100%
-    );
-}
-
-.theme-lite {
-  /* https://coolors.co/020303-f1f4f4-c8d3a7-e65c00 */
-  --text: #020303;
-  --text-dim: #999;
-  --bg0: #f1f4f4;
-  --bg1: #d6d6d6;
-  --highlight: #e65c00;
-}
-
-.theme-dark {
-  /* https://coolors.co/f1f4f4-606c38-283618-ff761a */
-  --text: #f3f3f3;
-  --text-dim: #666;
-  --bg0: #7e7e7d;
-  --bg1: #383838;
-  --highlight: #ff761a;
-}
-
-.theme-lite,
-.theme-dark {
-  /* TODO: Any vars dealing with color should should have a theme-neutral name (e.g. this should just be "--bg-gradient"), and should be defined in both themes, below */
-  --side-gradient:
-    linear-gradient(
-      to right,
-      var(--bg1) -1em,
-      transparent 0.5em
     );
 }
 
 html {
   font-family: system-ui, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
   font-size: 10pt;
+  min-height: 100%; // https://stackoverflow.com/a/17874759/109538
 }
 
-html,
+body,
+select,
+input {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
 body {
   margin: 0;
   padding: 0;
+
+  > #fail-bubble {
+    display: none;
+  }
 }
 
 body.fail {
   /* Image from https://www.redbubble.com/people/JonThomson/shop */
-  background: url("/images/fail_giraffe.png") right 50% no-repeat;
-  background-color: var(--bg1);
-  background-size: 30%;
+  background-image: url("/images/fail_giraffe.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-color: var(--bg);
+
+  > #fail-bubble {
+    display: inherit;
+    background-color: var(--bg-dim);
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 200px;
+    border-radius: 2rem 2rem;
+    color: var(--fg);
+    padding: 1em;
+    margin: 1em;
+
+    > #fail-bubble-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 1.5rem solid var(--bg-dim);
+      border-top: 1rem solid transparent;
+      border-bottom: 1rem solid transparent;
+      top: 80px;
+      right: -1.5rem;
+    }
+  }
 }
 
 #app {

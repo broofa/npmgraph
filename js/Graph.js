@@ -436,6 +436,9 @@ export default function Graph(props) {
     <line stroke="rgba(0,0,0,.15)" stroke-width="6px" x1="9" x2="9" y2="12"/>
     </pattern>`;
 
+    // Remove background fill (so app theme shows through)
+    d3.select('#graph .graph polygon').remove();
+
     d3.select('#graph svg')
       .insert('defs', ':first-child')
       .html(PATTERN);

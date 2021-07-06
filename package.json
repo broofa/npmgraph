@@ -13,6 +13,7 @@
   ],
   "dependencies": {
     "@hpcc-js/wasm": "1.4.1",
+    "checkcss": "1.1.0",
     "d3": "6.6.2",
     "filter-altered-clicks": "1.0.1",
     "http-errors": "1.8.0",

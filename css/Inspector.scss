@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  color: var(--text);
+  color: var(--fg);
   overflow: hidden;
   transition: flex-basis 0.5s;
 
@@ -21,8 +21,8 @@
 
   .tag {
     cursor: pointer;
-    background-color: var(--bg1);
-    color: var(--text);
+    background-color: var(--bg-dim);
+    color: var(--fg);
     border-radius: var(--rad_lg);
     padding: 2px 8px;
     overflow: hidden;
@@ -41,7 +41,7 @@
   }
 
   footer {
-    color: var(--text-dim);
+    color: var(--fg-dim);
     text-align: center;
     padding: 0.5em;
     box-sizing: border-box;
@@ -74,8 +74,8 @@ summary {
   flex-basis: auto;
   flex-shrink: 0;
   display: flex;
-  background: var(--bg0) var(--bg-gradient);
-  color: var(--text);
+  background: var(--fg-dim) var(--bg-gradient);
+  color: var(--bg);
   user-select: none;
 
   > * {
@@ -85,10 +85,12 @@ summary {
   .tab {
     padding: 0 10px;
     cursor: pointer;
-    background: var(--bg0) var(--bg-gradient);
-    border-left: solid 1px #888;
     font-size: 12pt;
     font-weight: 600;
+
+    &:not(:first-child) {
+      border-left: solid 1px #888;
+    }
 
     &.active {
       border-color: transparent;
@@ -115,11 +117,11 @@ summary {
   flex-grow: 1;
   width: 32em;
   padding: 0.5em 1em;
-  color: var(--text);
-  background-color: var(--bg0);
+  color: var(--fg);
+  background-color: var(--bg);
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
   border-bottom-left-radius: var(--rad_lg);
-  box-shadow: inset 1px -1px 6px #d6d6d677;
+  box-shadow: inset 1px -1px 6px var(--bg-dim);
 }

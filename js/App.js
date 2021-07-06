@@ -18,7 +18,7 @@ export const useDepIncludes = sharedStateHook(['dependencies'], 'depIncludes');
 export const useExcludes = sharedStateHook([], 'excludes');
 
 function Splitter({ onClick, isOpen }) {
-  return <div id='splitter' className='theme-dark bright-hover' onClick={onClick}>{isOpen ? '\u{25b6}' : '\u{25c0}'}</div>;
+  return <div id='splitter' className='bright-hover' onClick={onClick}>{isOpen ? '\u{25b6}' : '\u{25c0}'}</div>;
 }
 
 // Parse `q` query param from browser location

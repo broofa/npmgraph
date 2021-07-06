@@ -38,7 +38,23 @@
   </head>
 
   <body>
-    <div id='app' class='theme-lite'></div>
+    <div id='app'></div>
+
+    <!-- Load failed content -->
+    <div id='fail-bubble'>
+      <h1>Well this is awkward...</h1>
+      <p>Something's not working right.  Please check the following:</p>
+  
+      <ul>
+      <li>Make sure your browser is up-to-date (Chrome, Firefox, Safari, or Edge should work.)</li>
+      <li style="margin-top: 1em">Make sure your ad-blocker is disabled for this site. <span style="color: var(--fg-dim); font-style: italic">(We don't serve ads, but ad blockers may interfere with our bug reporting and analytics scripts.)</span></li>
+      </ul>
+  
+      <p>If the problem persists, don't sweat it.  It's been reported and we should have it fixed soon.  It it lasts more than a few days, go ahead and <a href="https://www.github.com/npmgraph/npmgraph">create an issue</a>).</p>
+  
+      <div id='fail-bubble-arrow' />
+    </div>
+  </div>
 
 <script src="https://d2wy8f7a9ursnm.cloudfront.net/v5/bugsnag.min.js"></script>
 
@@ -55,45 +71,11 @@ gtag('config', window.GA_TRACKING_ID);
 <script type="module" src="/js/index.js"></script>
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-  // Detect load failure.  `indexLoaded` gets set by index.js if it loads properly
-  // If it's not set here, then a script failed to load (probably due to a parse
-  // error from some unsupported language feature).
-  if (window.indexLoaded) return;
-
-  const body = document.body;
-  body.className = 'fail';
-
-  body.innerHTML = `<div style="
-    position: absolute;
-    background-color: var(--bg0);
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 35%;
-    border-radius: 2rem 2rem;
-    color: var(--text);
-    padding: 1em;
-    margin: 1em;">
-    <h1>Well this is awkward...</h1>
-    <p>Something's not working right.  Please check the following:</p>
-
-    <ul>
-    <li>Make sure your browser is up-to-date (Chrome, Firefox, Safari, or Edge should work.)</li>
-    <li style="margin-top: 1em">Make sure your ad-blocker is disabled for this site. <span style="color: #00000088; font-style: italic">(We don't serve ads, but ad blockers may interfere with our bug reporting and analytics scripts.)</span></li>
-    </ul>
-
-    <p>If the problem persists, don't sweat it.  It's been reported and we should have it fixed soon.  It it lasts more than a few days, go ahead and <a href="https://www.github.com/npmgraph/npmgraph">create an issue</a>).</p>
-
-    <!-- text bubble arrow -->
-    <div style="position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 1.5rem solid var(--bg0);
-    border-top: 1rem solid transparent;
-    border-bottom: 1rem solid transparent;
-    bottom: 50%;
-    right: -1.5rem;"></div>
-  `;
+  // Detect load failure.  `indexLoaded` should be set by index.js.  If it's not, then
+  // (presumably) it failed to load for some reason
+  if (!window.indexLoaded) {
+    document.body.className = 'fail';
+  };
 });
 </script>
 

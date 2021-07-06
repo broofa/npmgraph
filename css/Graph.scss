@@ -22,9 +22,9 @@
     width: 1.3em;
     padding: 0;
     margin: 0;
-    color: #333;
-    border: solid 1px var(--bg1);
-    background: var(--bg0);
+    color: var(--fg);
+    background: var(--bg);
+    border: solid 1px var(--bg-dim);
     border-radius: var(--rad_sm);
     outline: 0;
 
@@ -32,10 +32,6 @@
       background-color: var(--highlight);
     }
   }
-}
-
-svg {
-  fill: #666;
 }
 
 g .stub {
@@ -49,12 +45,12 @@ g .stub {
 
 g.node {
   text {
-    fill: #444;
+    fill: var(--fg);
   }
 
   path {
-    stroke: #444;
-    fill: white;
+    stroke: var(--fg);
+    fill: var(--bg);
   }
 
   &.collapsed {
@@ -67,7 +63,6 @@ g.node {
   }
 
   &.selected > text {
-    fill: black;
     font-weight: 600;
   }
 
@@ -80,15 +75,26 @@ g.node {
   }
 }
 
-g.edge.selected {
-  > path {
-    stroke-width: 2;
-    stroke: var(--highlight);
+g.edge {
+  > path { /* stylelint-disable-line no-descending-specificity */
+    stroke: var(--fg);
   }
 
   > polygon {
-    stroke: var(--highlight);
-    fill: var(--highlight);
+    stroke: var(--fg);
+    fill: var(--fg);
+  }
+
+  &.selected {
+    > path {
+      stroke-width: 2;
+      stroke: var(--highlight);
+    }
+
+    > polygon {
+      stroke: var(--highlight);
+      fill: var(--highlight);
+    }
   }
 }
 

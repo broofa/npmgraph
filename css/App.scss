@@ -22,8 +22,8 @@
   display: flex;
   box-sizing: border-box;
   height: 24pt;
-  color: var(--text);
-  background: var(--bg0) var(--bg-gradient);
+  color: var(--bg);
+  background: var(--fg-dim) var(--bg-gradient);
   border-top-left-radius: var(--rad_lg);
   border-bottom-left-radius: var(--rad_lg);
   padding-left: 10px;

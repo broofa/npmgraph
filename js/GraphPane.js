@@ -1,10 +1,10 @@
 import * as d3 from 'd3';
 import React, { useEffect, useRef } from 'react';
 import { useColorize, useDepIncludes, useExcludes } from './App';
-import { Pane, Section, Tags, Tag } from './Inspector';
-import { simplur } from './util';
 import { Toggle } from './Components';
 import { hslFor } from './Graph';
+import { Pane, Section, Tag, Tags } from './Inspector';
+import { simplur } from './util';
 import '/css/GraphPane.scss';
 
 function DepInclude({ type, ...props }) {
@@ -12,16 +12,16 @@ function DepInclude({ type, ...props }) {
 
   let arrow = null;
   switch (type) {
-    case 'devDependencies': arrow = <>(<span style={{ color: 'red' }}>{'\u{27f6}'}</span>)</>; break;
-    case 'peerDependencies': arrow = <>(<span style={{ color: 'green' }}>{'\u{27f6}'}</span>)</>; break;
+    case 'devDependencies': arrow = <>(<span style={{ color: 'red' }}>{'\u{2794}'}</span>)</>; break;
+    case 'peerDependencies': arrow = <>(<span style={{ color: 'green' }}>{'\u{2794}'}</span>)</>; break;
   }
 
   function toggle(checked) {
     setDepIncludes(checked ? [type, ...depIncludes] : depIncludes.filter(t => type != t));
   }
 
-  return <Toggle className='depInclude' checked={depIncludes.includes(type)} onChange={toggle}>
-      <code>{type} {arrow}</code>
+  return <Toggle checked={depIncludes.includes(type)} onChange={toggle}>
+      <span>{type} {arrow}</span>
       </Toggle>
   ;
 }
@@ -120,21 +120,18 @@ export default function GraphPane({ graph, ...props }) {
     .reverse();
 
   return <Pane {...props}>
-    Include:
     <DepInclude type='dependencies' />
     <DepInclude type='devDependencies' />
     <DepInclude type='peerDependencies' />
 
     <label>
-      Colorize by:
-      <select value={colorize ?? ''} onChange={e => setColorize(e.target.value)}>
+      <select value={colorize ?? ''} onChange={e => setColorize(e.target.value)} style={{ borderRadius: '0.5em', padding: 4, marginTop: '0.5em' }}>
+        <option value=''>Colorize By ...</option>
         <option value=''>Nothing (uncolored)</option>
-
         <option value='overall'> NPMS.io overall score</option>
         <option value='quality'> NPMS.io quality score</option>
         <option value='popularity'> NPMS.io popularity score</option>
         <option value='maintenance'>NPMS.io maintenance score</option>
-
         <option value='bus'># of maintainers</option>
       </select>
     </label>
@@ -164,7 +161,7 @@ export default function GraphPane({ graph, ...props }) {
         }
       </Tags>
 
-      <div style={{ fontSize: '90%', color: 'var(--text-dim)', marginTop: '1em' }}>
+      <div style={{ fontSize: '90%', color: 'var(fg-dim)', marginTop: '1em' }}>
         (Shift-click modules in graph to expand/collapse)
       </div>
     </Section>
