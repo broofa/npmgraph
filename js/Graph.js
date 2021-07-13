@@ -1,8 +1,9 @@
 import { graphviz } from '@hpcc-js/wasm';
 import * as d3 from 'd3';
 import React, { useEffect, useState } from 'react';
+import { useLocalStorage } from 'storagehooks';
 import wasmUrl from 'url:@hpcc-js/wasm/dist/graphvizlib.wasm';
-import { activity, store, useColorize, useDepIncludes, useExcludes, useGraph, useInspectorOpen, useModule, usePane, useQuery } from './App';
+import { activity, store, useDepIncludes, useExcludes, useGraph, useInspectorOpen, useModule, usePane, useQuery } from './App';
 import { $, fetchJSON, report, tagElement } from './util';
 import '/css/Graph.scss';
 
@@ -317,7 +318,7 @@ export default function Graph(props) {
   const [, setModule] = useModule();
   const [, setGraph] = useGraph();
   const [excludes, setExcludes] = useExcludes();
-  const [colorize] = useColorize();
+  const [colorize] = useLocalStorage('colorize', false);
 
   const [graphModules, setGraphModules] = useState();
   const [zoom, setZoom] = useState(0);

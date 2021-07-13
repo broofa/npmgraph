@@ -1,10 +1,11 @@
 import * as d3 from 'd3';
 import React, { useEffect, useRef } from 'react';
-import { useColorize, useDepIncludes, useExcludes } from './App';
-import { Pane, Section, Tags, Tag } from './Inspector';
-import { simplur } from './util';
+import { useLocalStorage } from 'storagehooks';
+import { useDepIncludes, useExcludes } from './App';
 import { Toggle } from './Components';
 import { hslFor } from './Graph';
+import { Pane, Section, Tag, Tags } from './Inspector';
+import { simplur } from './util';
 import '/css/GraphPane.scss';
 
 function DepInclude({ type, ...props }) {
@@ -92,7 +93,8 @@ function PieGraph({ entries, ...props }) {
 export default function GraphPane({ graph, ...props }) {
   const compareEntryKey = ([a], [b]) => a < b ? -1 : a > b ? 1 : 0;
   const compareEntryValue = ([, a], [, b]) => a < b ? -1 : a > b ? 1 : 0;
-  const [colorize, setColorize] = useColorize();
+  const [colorize, setColorize] = useLocalStorage('colorize', false);
+
   const [excludes] = useExcludes();
 
   const occurances = {};
